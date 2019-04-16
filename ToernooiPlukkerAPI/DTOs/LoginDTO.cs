@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ToernooiPlukkerAPI.DTOs
 {
-    public class UserDTO
+    public class LoginDTO
     {
-        [Required]
-        public string Naam { get; set; }
-        [Required]
-        public string Achternaam { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
