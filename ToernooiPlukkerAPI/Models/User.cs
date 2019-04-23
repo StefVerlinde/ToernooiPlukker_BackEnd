@@ -8,7 +8,7 @@ namespace ToernooiPlukkerAPI.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         [Required]
         public string Naam { get; set; }
         [Required]
@@ -16,15 +16,12 @@ namespace ToernooiPlukkerAPI.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        public string Wachtwoord { get; set; }
 
-        public User(string naam, string achternaam, string email, string wachtwoord)
+        public User(string naam, string achternaam, string email)
         {
             this.Naam = naam;
             this.Achternaam = achternaam;
             this.Email = email;
-            this.Wachtwoord = wachtwoord;
         }
 
         public User()

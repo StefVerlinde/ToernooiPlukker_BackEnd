@@ -15,7 +15,7 @@ namespace ToernooiPlukkerAPI.DTOs
         public String Achternaam { get; set; }
 
         [Required]
-        [Compare("Password")]
+        [Compare("Wachtwoord")]
         public String WachtwoordConfirm { get; set; }
     }
 }

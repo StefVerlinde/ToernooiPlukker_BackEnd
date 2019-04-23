@@ -18,12 +18,15 @@ using ToernooiPlukkerAPI.Models;
 namespace ToernooiPlukkerAPI.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class AccountController : ControllerBase
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
+
         public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IUserRepository userRepository, IConfiguration config)
         {
             _signInManager = signInManager;
@@ -67,6 +70,14 @@ namespace ToernooiPlukkerAPI.Controllers
                 return Created("", token);
             }
             return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
+        {
+            var user = await _userManager.FindByNameAsync(email);
+            return user == null;
         }
 
         private String GetToken(IdentityUser user)

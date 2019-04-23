@@ -15,7 +15,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
         public UserRepository(ApplicationDbContext dbContext)
         {
             _context = dbContext;
-            _users = dbContext.Users;
+            _users = dbContext.Users_Domain;
         }
         public void Add(User user)
         {
@@ -39,7 +39,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
 
         public User GetById(int id)
         {
-            return _users.SingleOrDefault(u => u.Id == id);
+            return _users.SingleOrDefault(u => u.UserId == id);
         }
 
         public void SaveChanges()

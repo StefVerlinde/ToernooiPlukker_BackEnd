@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
@@ -10,7 +14,10 @@ using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Controllers
 {
+    [ApiConventionType(typeof(DefaultApiConventions))]
+    [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -41,18 +48,17 @@ namespace ToernooiPlukkerAPI.Controllers
             User userToCreate = new User() {
                 Naam = user.Naam,
                 Achternaam = user.Achternaam,
-                Email = user.Email,
-                Wachtwoord = user.Wachtwoord
+                Email = user.Email
             };
             _userRepository.Add(userToCreate);
             _userRepository.SaveChanges();
-            return CreatedAtAction(nameof(GetUser), new { id = userToCreate.Id }, userToCreate);
+            return CreatedAtAction(nameof(GetUser), new { id = userToCreate.UserId }, userToCreate);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, User user)
         {
-            if (id != user.Id)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
