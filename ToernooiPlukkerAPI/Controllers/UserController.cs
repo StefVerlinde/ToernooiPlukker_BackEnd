@@ -34,12 +34,20 @@ namespace ToernooiPlukkerAPI.Controllers
             return _userRepository.GetAll().OrderBy(u => u.Naam);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public ActionResult<User> GetUser(int id)
         {
             User user = _userRepository.GetById(id);
             if (user == null) return NotFound();
             return user;
+        }
+
+        [HttpGet("GetByEmail/{email}")]
+        public ActionResult<UserDTO> GetUserByEmail(string email)
+        {
+            UserDTO userDto = _userRepository.GetByEmail(email);
+            if (userDto == null) return NotFound();
+            return userDto;
         }
 
         [HttpPost]

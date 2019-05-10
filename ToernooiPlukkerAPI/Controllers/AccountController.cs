@@ -38,16 +38,17 @@ namespace ToernooiPlukkerAPI.Controllers
         //Login
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<String>> CreateToken(LoginDTO model)
+        public async Task<ActionResult<UserDTO>> CreateToken(LoginDTO model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
+            UserDTO userIn = _userRepository.GetByEmail(model.Email);
             if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Wachtwoord, false);
                 if (result.Succeeded)
                 {
-                    string token = GetToken(user);
-                    return Created("", token); //returns only the token                    
+                    userIn.Token = GetToken(user);
+                    return Ok(userIn); //returns the user                    
                 }
             }
             return BadRequest();
@@ -56,7 +57,7 @@ namespace ToernooiPlukkerAPI.Controllers
         //Register
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<String>> Register(RegisterDTO model)
+        public async Task<ActionResult<UserDTO>> Register(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
             User newUser = new User { Email = model.Email, Naam = model.Naam, Achternaam = model.Achternaam };
@@ -66,8 +67,9 @@ namespace ToernooiPlukkerAPI.Controllers
             {
                 _userRepository.Add(newUser);
                 _userRepository.SaveChanges();
-                string token = GetToken(user);
-                return Created("", token);
+                UserDTO userDto = _userRepository.GetByEmail(newUser.Email);
+                userDto.Token = GetToken(user);
+                return Ok(userDto);
             }
             return BadRequest();
         }

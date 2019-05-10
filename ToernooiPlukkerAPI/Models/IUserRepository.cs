@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToernooiPlukkerAPI.DTOs;
 
 namespace ToernooiPlukkerAPI.Models
 {
@@ -9,7 +10,7 @@ namespace ToernooiPlukkerAPI.Models
     {
         IEnumerable<User> GetAll();
         User GetById(int id);
-        User GetByEmail(string email);
+        UserDTO GetByEmail(string email);
         void Add(User user);
         void Delete(User user);
         void Update(User user);

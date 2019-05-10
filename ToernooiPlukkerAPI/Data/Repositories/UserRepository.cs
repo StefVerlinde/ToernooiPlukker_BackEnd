@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Data.Repositories
@@ -32,9 +33,10 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             return _users.ToList();
         }
 
-        public User GetByEmail(string email)
+        public UserDTO GetByEmail(string email)
         {
-            return _users.SingleOrDefault(u => u.Email == email);
+            User user = _users.SingleOrDefault(u => u.Email.Equals(email));
+            return new UserDTO(user);
         }
 
         public User GetById(int id)
