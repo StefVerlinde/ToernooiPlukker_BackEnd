@@ -13,7 +13,7 @@ namespace ToernooiPlukkerAPI.Models
         UserDTO GetByEmail(string email);
         void Add(User user);
         void Delete(User user);
-        void Update(User user);
+        UserDTO Update(UserDTO user);
         void SaveChanges();
     }
 }

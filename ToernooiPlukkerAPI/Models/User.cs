@@ -17,6 +17,8 @@ namespace ToernooiPlukkerAPI.Models
         [EmailAddress]
         public string Email { get; set; }
 
+        public string Token { get; set; }
+
         public User(string naam, string achternaam, string email)
         {
             this.Naam = naam;

@@ -38,16 +38,16 @@ namespace ToernooiPlukkerAPI.Controllers
         //Login
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateToken(LoginDTO model)
+        public async Task<ActionResult<String>> CreateToken(LoginDTO model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
-            UserDTO userIn = _userRepository.GetByEmail(model.Email);
+            var userIn = _userRepository.GetByEmail(model.Email);
             if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Wachtwoord, false);
                 if (result.Succeeded)
                 {
-                    userIn.Token = GetToken(user);
+                    userIn.Token = GetToken(user, $"{userIn.Naam} {userIn.Achternaam}");
                     return Ok(userIn); //returns the user                    
                 }
             }
@@ -57,7 +57,7 @@ namespace ToernooiPlukkerAPI.Controllers
         //Register
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<UserDTO>> Register(RegisterDTO model)
+        public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
             User newUser = new User { Email = model.Email, Naam = model.Naam, Achternaam = model.Achternaam };
@@ -67,8 +67,8 @@ namespace ToernooiPlukkerAPI.Controllers
             {
                 _userRepository.Add(newUser);
                 _userRepository.SaveChanges();
-                UserDTO userDto = _userRepository.GetByEmail(newUser.Email);
-                userDto.Token = GetToken(user);
+                var userDto = _userRepository.GetByEmail(newUser.Email);
+                userDto.Token = GetToken(user, $"{newUser.Naam} {newUser.Achternaam}");
                 return Ok(userDto);
             }
             return BadRequest();
@@ -82,12 +82,12 @@ namespace ToernooiPlukkerAPI.Controllers
             return user == null;
         }
 
-        private String GetToken(IdentityUser user)
+        private String GetToken(IdentityUser user, string nickname)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                new Claim(JwtRegisteredClaimNames.Sub, nickname),
+                new Claim(JwtRegisteredClaimNames.UniqueName, nickname)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

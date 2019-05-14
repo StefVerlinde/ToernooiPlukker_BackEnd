@@ -26,6 +26,7 @@ namespace ToernooiPlukkerAPI.Data
             {
                 IEnumerable<User> users = new List<User>
                 {
+                    new User("Test", "Testman", "a@a.com"),
                     new User("Stef", "Verlinde", "stefverlinde@hotmail.com"),
                     new User("Bernard", "Deploige", "bernarddeploige@hotmail.com"),
                     new User("Tijs", "Martens", "tijsmartens@hotmail.com"),
@@ -37,11 +38,11 @@ namespace ToernooiPlukkerAPI.Data
                 {
                     _dbContext.Users_Domain.Add(u);
                     var email = u.Email;
-                    var wachtwoord = "P@ssword1";
+                    var wachtwoord = "123456789";
                     var role = "User";
                     await CreateUser(email, wachtwoord, role);
                 }
-
+                
                 _dbContext.SaveChanges();
             }
         }

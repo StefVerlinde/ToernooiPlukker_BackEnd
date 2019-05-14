@@ -49,9 +49,15 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(User user)
+        public UserDTO Update(UserDTO user)
         {
-            _context.Update(user);
+            var usr = GetById(user.Id);
+            usr.Naam = user.Naam;
+            usr.Achternaam = user.Achternaam;
+            usr.Email = user.Email;
+            _context.Update(usr);
+            _context.SaveChanges();
+            return GetByEmail(usr.Email);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ToernooiPlukkerAPI.DTOs
                 Naam = user.Naam;
                 Achternaam = user.Achternaam;
                 Email = user.Email;
+                Token = user.Token;
             }
         }
     }

@@ -57,6 +57,7 @@ namespace ToernooiPlukkerAPI.Controllers
                 Naam = user.Naam,
                 Achternaam = user.Achternaam,
                 Email = user.Email
+                
             };
             _userRepository.Add(userToCreate);
             _userRepository.SaveChanges();
@@ -64,15 +65,15 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, User user)
+        public ActionResult<UserDTO> UpdateUser(int id, UserDTO user)
         {
-            if (id != user.UserId)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
-            _userRepository.Update(user);
+            var usr = _userRepository.Update(user);
             _userRepository.SaveChanges();
-            return NoContent();
+            return usr;
         }
 
         [HttpDelete("{id}")]
