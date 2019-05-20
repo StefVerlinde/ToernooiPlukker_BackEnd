@@ -14,6 +14,7 @@ namespace ToernooiPlukkerAPI.Data.Mappers
         {
             builder.ToTable("User");
             builder.HasKey(u => u.UserId);
+            builder.HasMany(u => u.Toernooien).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

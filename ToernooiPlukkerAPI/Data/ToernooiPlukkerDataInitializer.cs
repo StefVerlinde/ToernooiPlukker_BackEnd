@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -24,7 +25,8 @@ namespace ToernooiPlukkerAPI.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-                IEnumerable<User> users = new List<User>
+                //Aanmaken users
+                Collection<User> users = new Collection<User>
                 {
                     new User("Test", "Testman", "a@a.com"),
                     new User("Stef", "Verlinde", "stefverlinde@hotmail.com"),
@@ -32,6 +34,52 @@ namespace ToernooiPlukkerAPI.Data
                     new User("Tijs", "Martens", "tijsmartens@hotmail.com"),
                     new User("Uche", "Osajie", "ucheosajie@hotmail.com")
                 };
+
+                //Aanmaken toernooien
+                users[0].addToernooi(new Toernooi("Clubtoernooi 2017", new DateTime(2017, 04, 25), 20, 4, users[0]));
+                users[0].addToernooi(new Toernooi("Clubtoernooi 2018", new DateTime(2018, 04, 25), 20, 4, users[0]));
+                users[1].addToernooi(new Toernooi("Clubtoernooi 2019", new DateTime(2019, 04, 25), 20, 4, users[0]));
+
+                //Aanmaken teams met spelers
+                foreach(Toernooi t in users[0].Toernooien)
+                {
+                    for(int i = 0; i< t.AantalTeams; i++)
+                    {
+                        Team team = new Team($"team{i}", t);
+                        Collection<Speler> spelers = new Collection<Speler>
+                        {
+                            new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
+                            new Speler("Bernard","Depoige",8, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Tijs","Martens",6, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Uche","Oesaji",4, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Jordy","Detier",2, Geslacht.Man, Functie.Speler, team)
+                        };
+                        foreach(Speler s in spelers){
+                            team.addSpeler(s);
+                        }
+                        t.addTeam(team);
+                    }
+                }
+                foreach (Toernooi t in users[1].Toernooien)
+                {
+                    for (int i = 0; i < t.AantalTeams; i++)
+                    {
+                        Team team = new Team($"team{i}", t);
+                        Collection<Speler> spelers = new Collection<Speler>
+                        {
+                            new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
+                            new Speler("Bernard","Depoige",8, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Tijs","Martens",6, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Uche","Oesaji",4, Geslacht.Man, Functie.Speler, team),
+                            new Speler("Jordy","Detier",2, Geslacht.Man, Functie.Speler, team)
+                        };
+                        foreach (Speler s in spelers)
+                        {
+                            team.addSpeler(s);
+                        }
+                        t.addTeam(team);
+                    }
+                }
 
 
                 foreach (User u in users)

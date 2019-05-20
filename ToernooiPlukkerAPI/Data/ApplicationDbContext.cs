@@ -22,6 +22,9 @@ namespace ToernooiPlukkerAPI.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new ToernooiConfiguration());
+            builder.ApplyConfiguration(new TeamConfiguration());
+            builder.ApplyConfiguration(new SpelerConfiguration());
         }
     }
 }
