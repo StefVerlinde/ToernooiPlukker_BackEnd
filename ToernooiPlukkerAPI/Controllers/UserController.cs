@@ -22,9 +22,12 @@ namespace ToernooiPlukkerAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository context)
+        private readonly IToernooiRepository _toernooiRepository;
+
+        public UserController(IUserRepository context, IToernooiRepository ItoernooiRepo)
         {
             _userRepository = context;
+            _toernooiRepository = ItoernooiRepo;
         }
 
         // GET: api/<controller>

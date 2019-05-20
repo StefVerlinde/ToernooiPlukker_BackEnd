@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,9 @@ namespace ToernooiPlukkerAPI.DTOs
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-    
+
+        public Collection<Toernooi> Toernooien { get; set; }
+
         public string Token { get; set; }
 
         public UserDTO(User user)
@@ -28,6 +31,7 @@ namespace ToernooiPlukkerAPI.DTOs
                 Naam = user.Naam;
                 Achternaam = user.Achternaam;
                 Email = user.Email;
+                Toernooien = user.Toernooien;
                 Token = user.Token;
             }
         }

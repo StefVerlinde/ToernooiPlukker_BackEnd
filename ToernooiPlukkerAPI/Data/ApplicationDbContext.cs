@@ -12,6 +12,9 @@ namespace ToernooiPlukkerAPI.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<User> Users_Domain { get; set; }
+        public DbSet<Toernooi> Toernooi_Domain { get; set; }
+        public DbSet<Team> Team_Domain { get; set; }
+        public DbSet<Speler> Speler_Domain { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

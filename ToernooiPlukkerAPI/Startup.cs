@@ -63,6 +63,9 @@ namespace ToernooiPlukkerAPI
 
             services.AddScoped<ToernooiPlukkerDataInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IToernooiRepository, ToernooiRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<ISpelerRepository, SpelerRepository>();
 
             //Enable authentication in swagger
             services.AddOpenApiDocument(c => {

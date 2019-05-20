@@ -38,14 +38,14 @@ namespace ToernooiPlukkerAPI.Data
                 //Aanmaken toernooien
                 users[0].addToernooi(new Toernooi("Clubtoernooi 2017", new DateTime(2017, 04, 25), 20, 4, users[0]));
                 users[0].addToernooi(new Toernooi("Clubtoernooi 2018", new DateTime(2018, 04, 25), 20, 4, users[0]));
-                users[1].addToernooi(new Toernooi("Clubtoernooi 2019", new DateTime(2019, 04, 25), 20, 4, users[0]));
+                users[1].addToernooi(new Toernooi("Clubtoernooi 2019", new DateTime(2019, 04, 25), 20, 4, users[1]));
 
                 //Aanmaken teams met spelers
-                foreach(Toernooi t in users[0].Toernooien)
+                foreach (Toernooi t in users[0].Toernooien)
                 {
-                    for(int i = 0; i< t.AantalTeams; i++)
+                    for (int i = 0; i < t.AantalTeams; i++)
                     {
-                        Team team = new Team($"team{i}", t);
+                        Team team = new Team($"team{i+1}", t);
                         Collection<Speler> spelers = new Collection<Speler>
                         {
                             new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
@@ -54,7 +54,8 @@ namespace ToernooiPlukkerAPI.Data
                             new Speler("Uche","Oesaji",4, Geslacht.Man, Functie.Speler, team),
                             new Speler("Jordy","Detier",2, Geslacht.Man, Functie.Speler, team)
                         };
-                        foreach(Speler s in spelers){
+                        foreach (Speler s in spelers)
+                        {
                             team.addSpeler(s);
                         }
                         t.addTeam(team);
@@ -80,8 +81,6 @@ namespace ToernooiPlukkerAPI.Data
                         t.addTeam(team);
                     }
                 }
-
-
                 foreach (User u in users)
                 {
                     _dbContext.Users_Domain.Add(u);
@@ -90,8 +89,9 @@ namespace ToernooiPlukkerAPI.Data
                     var role = "User";
                     await CreateUser(email, wachtwoord, role);
                 }
-                
+
                 _dbContext.SaveChanges();
+
             }
         }
 
