@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Data.Repositories
@@ -27,9 +29,9 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _toernooi.Remove(toernooi);
         }
 
-        public IEnumerable<Toernooi> GetAll()
+        public IEnumerable<ToernooiDTO> GetAll()
         {
-            return _toernooi.ToList();
+            return fromListToDtoList( _toernooi.Include(t => t.Creator).ToList());
         }
 
         public Toernooi GetById(int id)
@@ -37,9 +39,9 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             return _toernooi.SingleOrDefault(t => t.ToernooiId == id);
         }
 
-        public IEnumerable<Toernooi> GetByUserId(int id)
+        public IEnumerable<ToernooiDTO> GetByUserId(int id)
         {
-            return _toernooi.Where(t => id == t.Creator.UserId);
+            return fromListToDtoList(_toernooi.Include(t => t.Creator).Where(t => id == t.Creator.UserId));
         }
 
         public void SaveChanges()
@@ -55,6 +57,16 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.Update(toer);
             _context.SaveChanges();
             return GetById(toer.ToernooiId);
+        }
+
+        private ICollection<ToernooiDTO> fromListToDtoList(IEnumerable<Toernooi> toernooi)
+        {
+            ICollection<ToernooiDTO> toernooienDTO = new List<ToernooiDTO>();
+            foreach (Toernooi t in toernooi)
+            {
+                toernooienDTO.Add(new ToernooiDTO(t));
+            }
+            return toernooienDTO.ToList();
         }
     }
 }

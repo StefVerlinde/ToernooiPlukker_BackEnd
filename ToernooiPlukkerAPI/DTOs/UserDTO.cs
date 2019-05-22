@@ -19,8 +19,6 @@ namespace ToernooiPlukkerAPI.DTOs
         [EmailAddress]
         public string Email { get; set; }
 
-        public Collection<Toernooi> Toernooien { get; set; }
-
         public string Token { get; set; }
 
         public UserDTO(User user)
@@ -31,7 +29,6 @@ namespace ToernooiPlukkerAPI.DTOs
                 Naam = user.Naam;
                 Achternaam = user.Achternaam;
                 Email = user.Email;
-                Toernooien = user.Toernooien;
                 Token = user.Token;
             }
         }

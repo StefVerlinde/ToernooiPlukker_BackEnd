@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Controllers
@@ -23,13 +24,13 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Toernooi> GetToernooien()
+        public IEnumerable<ToernooiDTO> GetToernooien()
         {
             return _toernooiRepository.GetAll().OrderBy(t => t.Datum).Reverse();
         }
 
         [HttpGet("GetByUserId/{id}")]
-        public IEnumerable<Toernooi> GetByUserId(int id)
+        public IEnumerable<ToernooiDTO> GetByUserId(int id)
         {
             return _toernooiRepository.GetByUserId(id).OrderBy(t => t.Datum).Reverse();
         }
