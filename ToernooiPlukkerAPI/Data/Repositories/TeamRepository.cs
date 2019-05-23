@@ -30,7 +30,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
 
         public IEnumerable<TeamDTO> GetAll()
         {
-            return fromListToDtoList(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).ToList());
+            return fromListToDtoList(_team.Include(t => t.Toernooi).ToList());
         }
 
         public Team GetById(int id)
@@ -40,12 +40,12 @@ namespace ToernooiPlukkerAPI.Data.Repositories
 
         public TeamDTO GetByIdDto(int id)
         {
-            return new TeamDTO(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).SingleOrDefault(t => t.TeamId == id));
+            return new TeamDTO(_team.Include(t => t.Toernooi).SingleOrDefault(t => t.TeamId == id));
         }
 
         public IEnumerable<TeamDTO> GetByToernooiId(int id)
         {
-            return fromListToDtoList(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).Where(t => id == t.Toernooi.ToernooiId));
+            return fromListToDtoList(_team.Include(t => t.Toernooi).Where(t => id == t.Toernooi.ToernooiId));
         }
 
         public void SaveChanges()

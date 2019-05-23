@@ -34,7 +34,7 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        public ActionResult<TeamDTO> GetTaem(int id)
+        public ActionResult<TeamDTO> GetTeam(int id)
         {
             TeamDTO team = _teamRepository.GetByIdDto(id);
             if (team == null) return NotFound();
@@ -44,10 +44,10 @@ namespace ToernooiPlukkerAPI.Controllers
         [HttpPost]
         public ActionResult<Team> CreateTeam(Team team)
         {
-            Team teamToCreate = new Team(team.Naam, team.Toernooi);
+            Team teamToCreate = new Team(team.Naam, team.AantalSpelers, team.Toernooi);
             _teamRepository.Add(teamToCreate);
             _teamRepository.SaveChanges();
-            return CreatedAtAction(nameof(GetTaem), new { id = teamToCreate.TeamId }, teamToCreate);
+            return CreatedAtAction(nameof(GetTeam), new { id = teamToCreate.TeamId }, teamToCreate);
         }
 
         [HttpPut("{id}")]

@@ -10,6 +10,7 @@ namespace ToernooiPlukkerAPI.DTOs
     {
         public int TeamId { get; set; }
         public string Naam { get; set; }
+        public int AantalSpelers { get; set; }
         public ToernooiDTO Toernooi { get; set; }
 
         public TeamDTO(Team team)
@@ -18,6 +19,7 @@ namespace ToernooiPlukkerAPI.DTOs
             {
                 TeamId = team.TeamId;
                 Naam = team.Naam;
+                AantalSpelers = team.AantalSpelers;
                 Toernooi = new ToernooiDTO(team.Toernooi);
 
             }

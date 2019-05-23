@@ -45,7 +45,7 @@ namespace ToernooiPlukkerAPI.Data
                 {
                     for (int i = 0; i < t.AantalTeams; i++)
                     {
-                        Team team = new Team($"team{i+1}", t);
+                        Team team = new Team($"team{i+1}", 5,t);
                         Collection<Speler> spelers = new Collection<Speler>
                         {
                             new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
@@ -65,7 +65,7 @@ namespace ToernooiPlukkerAPI.Data
                 {
                     for (int i = 0; i < t.AantalTeams; i++)
                     {
-                        Team team = new Team($"team{i}", t);
+                        Team team = new Team($"team{i}", 5, t);
                         Collection<Speler> spelers = new Collection<Speler>
                         {
                             new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),

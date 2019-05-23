@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Data.Repositories
@@ -27,14 +28,24 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _speler.Remove(speler);
         }
 
-        public IEnumerable<Speler> GetAll()
+        public IEnumerable<SpelerDTO> GetAll()
         {
-            return _speler.ToList();
+            return fromListToDtoList(_speler.Include(s => s.Team).ToList());
         }
 
         public Speler GetById(int id)
         {
             return _speler.SingleOrDefault(s => s.SpelerId == id);
+        }
+
+        public SpelerDTO GetByIdDto(int id)
+        {
+            return new SpelerDTO(_speler.Include(s => s.Team).SingleOrDefault(s => s.SpelerId == id));
+        }
+
+        public IEnumerable<SpelerDTO> GetByTeamId(int id)
+        {
+            return fromListToDtoList(_speler.Include(s => s.Team).Where(s => id == s.Team.TeamId));
         }
 
         public void SaveChanges()
@@ -53,6 +64,16 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.Update(s);
             _context.SaveChanges();
             return GetById(s.SpelerId);
+        }
+
+        private ICollection<SpelerDTO> fromListToDtoList(IEnumerable<Speler> spelers)
+        {
+            ICollection<SpelerDTO> spelerDTO = new List<SpelerDTO>();
+            foreach (Speler s in spelers)
+            {
+                spelerDTO.Add(new SpelerDTO(s));
+            }
+            return spelerDTO.ToList();
         }
     }
 }
