@@ -36,9 +36,9 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        public ActionResult<Toernooi> GetToernooi(int id)
+        public ActionResult<ToernooiDTO> GetToernooi(int id)
         {
-            Toernooi toernooi = _toernooiRepository.GetById(id);
+            ToernooiDTO toernooi = _toernooiRepository.GetByIdDto(id);
             if (toernooi == null) return NotFound();
             return toernooi;
         }
@@ -65,7 +65,7 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Toernooi> DeleteRecipe(int id)
+        public ActionResult<Toernooi> DeleteToernooi(int id)
         {
             Toernooi toernooi = _toernooiRepository.GetById(id);
             if (toernooi == null)

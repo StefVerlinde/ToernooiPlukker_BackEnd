@@ -26,7 +26,7 @@ namespace ToernooiPlukkerAPI.Models
             get => _datum;
             set {
                 if(value == null /*|| value.Date < DateTime.Now*/)
-                    throw new ArgumentException("Datum mag niet leeg of in het verleden zijn");
+                    throw new ArgumentException("Datum mag niet leeg zijn");
                 _datum = value;
             }
         }

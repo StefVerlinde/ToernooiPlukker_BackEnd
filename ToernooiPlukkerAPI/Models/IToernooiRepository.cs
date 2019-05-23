@@ -6,6 +6,7 @@ namespace ToernooiPlukkerAPI.Models
     public interface IToernooiRepository
     {
         IEnumerable<ToernooiDTO> GetAll();
+        ToernooiDTO GetByIdDto(int id);
         Toernooi GetById(int id);
         IEnumerable<ToernooiDTO> GetByUserId(int id);
         void Add(Toernooi toernooi);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToernooiPlukkerAPI.DTOs;
 using ToernooiPlukkerAPI.Models;
 
 namespace ToernooiPlukkerAPI.Data.Repositories
@@ -27,14 +28,24 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _team.Remove(team);
         }
 
-        public IEnumerable<Team> GetAll()
+        public IEnumerable<TeamDTO> GetAll()
         {
-            return _team.ToList();
+            return fromListToDtoList(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).ToList());
         }
 
         public Team GetById(int id)
         {
             return _team.SingleOrDefault(t => t.TeamId == id);
+        }
+
+        public TeamDTO GetByIdDto(int id)
+        {
+            return new TeamDTO(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).SingleOrDefault(t => t.TeamId == id));
+        }
+
+        public IEnumerable<TeamDTO> GetByToernooiId(int id)
+        {
+            return fromListToDtoList(_team.Include(t => t.Toernooi).ThenInclude(t => t.Creator).Where(t => id == t.Toernooi.ToernooiId));
         }
 
         public void SaveChanges()
@@ -49,6 +60,16 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.Update(t);
             _context.SaveChanges();
             return GetById(t.TeamId);
+        }
+
+        private ICollection<TeamDTO> fromListToDtoList(IEnumerable<Team> teams)
+        {
+            ICollection<TeamDTO> teamDTO = new List<TeamDTO>();
+            foreach (Team t in teams)
+            {
+                teamDTO.Add(new TeamDTO(t));
+            }
+            return teamDTO.ToList();
         }
     }
 }

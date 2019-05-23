@@ -34,6 +34,11 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             return fromListToDtoList( _toernooi.Include(t => t.Creator).ToList());
         }
 
+        public ToernooiDTO GetByIdDto(int id)
+        {
+            return new ToernooiDTO(_toernooi.Include(t => t.Creator).SingleOrDefault(t => t.ToernooiId == id));
+        }
+
         public Toernooi GetById(int id)
         {
             return _toernooi.SingleOrDefault(t => t.ToernooiId == id);
