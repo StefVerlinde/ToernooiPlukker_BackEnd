@@ -15,10 +15,12 @@ namespace ToernooiPlukkerAPI.Controllers
     public class SpelerController: ControllerBase
     {
         private readonly ISpelerRepository _spelerRepository;
+        private readonly ITeamRepository _teamRepository;
 
-        public SpelerController(ISpelerRepository context)
+        public SpelerController(ISpelerRepository context, ITeamRepository teamRepo)
         {
             _spelerRepository = context;
+            _teamRepository = teamRepo;
         }
 
         [HttpGet]
@@ -41,10 +43,11 @@ namespace ToernooiPlukkerAPI.Controllers
             return speler;
         }
 
-        [HttpPost]
-        public ActionResult<Speler> CreateSpeler(Speler speler)
+        [HttpPost("{id}")]
+        public ActionResult<Speler> CreateSpeler(int id, SpelerDTO speler)
         {
-            Speler spelerToCreate = new Speler(speler.Naam, speler.Achternaam, speler.Sterkte, speler.Geslacht, speler.Functie, speler.Team);
+            Team team = _teamRepository.GetById(id);
+            Speler spelerToCreate = new Speler(speler.Naam, speler.Achternaam, speler.Sterkte, speler.Geslacht, speler.Functie, team);
             _spelerRepository.Add(spelerToCreate);
             _spelerRepository.SaveChanges();
             return CreatedAtAction(nameof(GetSpeler), new { id = spelerToCreate.SpelerId }, spelerToCreate);

@@ -15,10 +15,12 @@ namespace ToernooiPlukkerAPI.Controllers
     public class TeamController: ControllerBase
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IToernooiRepository _toernooiRepository;
 
-        public TeamController(ITeamRepository context)
+        public TeamController(ITeamRepository context, IToernooiRepository toernooiRepo)
         {
             _teamRepository = context;
+            _toernooiRepository = toernooiRepo;
         }
 
         [HttpGet]
@@ -41,10 +43,11 @@ namespace ToernooiPlukkerAPI.Controllers
             return team;
         }
 
-        [HttpPost]
-        public ActionResult<Team> CreateTeam(Team team)
+        [HttpPost("{id}")]
+        public ActionResult<Team> CreateTeam(int id, TeamDTO team)
         {
-            Team teamToCreate = new Team(team.Naam, team.Toernooi);
+            Toernooi toernooi = _toernooiRepository.GetById(id);
+            Team teamToCreate = new Team(team.Naam, toernooi);
             _teamRepository.Add(teamToCreate);
             _teamRepository.SaveChanges();
             return CreatedAtAction(nameof(GetTeam), new { id = teamToCreate.TeamId }, teamToCreate);
