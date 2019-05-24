@@ -51,7 +51,7 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Team> UpdateTeam(int id, Team team)
+        public ActionResult<Team> UpdateTeam(int id, TeamDTO team)
         {
             if (id != team.TeamId)
             {

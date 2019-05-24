@@ -51,7 +51,7 @@ namespace ToernooiPlukkerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Speler> UpdateSpeler(int id, Speler speler)
+        public ActionResult<Speler> UpdateSpeler(int id, SpelerDTO speler)
         {
             if (id != speler.SpelerId)
             {

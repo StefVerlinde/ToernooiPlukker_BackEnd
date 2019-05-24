@@ -31,12 +31,5 @@ namespace ToernooiPlukkerAPI.Models
             Naam = naam;
             Toernooi = toernooi;
         }
-
-        public void addSpeler(Speler speler)
-        {
-            if (speler == null)
-                throw new ArgumentException("Speler mag niet leeg zijn");
-            Spelers.Add(speler);
-        }
     }
 }

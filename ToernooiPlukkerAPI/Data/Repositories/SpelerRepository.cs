@@ -53,7 +53,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Speler Update(Speler speler)
+        public Speler Update(SpelerDTO speler)
         {
             var s = GetById(speler.SpelerId);
             s.Naam = speler.Naam;
@@ -61,7 +61,6 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             s.Sterkte = speler.Sterkte;
             s.Geslacht = speler.Geslacht;
             s.Functie = speler.Functie;
-            s.Team = speler.Team;
             _context.Update(s);
             _context.SaveChanges();
             return GetById(s.SpelerId);

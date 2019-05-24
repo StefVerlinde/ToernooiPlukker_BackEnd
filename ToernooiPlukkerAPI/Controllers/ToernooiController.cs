@@ -59,7 +59,6 @@ namespace ToernooiPlukkerAPI.Controllers
             {
                 return BadRequest();
             }
-            toernooi.Datum = toernooi.Datum.AddDays(1);
             var toer = _toernooiRepository.Update(toernooi);
             _toernooiRepository.SaveChanges();
             return toer;

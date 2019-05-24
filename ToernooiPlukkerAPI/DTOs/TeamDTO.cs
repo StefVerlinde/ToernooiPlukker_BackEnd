@@ -19,7 +19,6 @@ namespace ToernooiPlukkerAPI.DTOs
                 TeamId = team.TeamId;
                 Naam = team.Naam;
                 Toernooi = new ToernooiDTO(team.Toernooi);
-
             }
         }
     }

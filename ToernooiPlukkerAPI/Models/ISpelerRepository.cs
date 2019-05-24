@@ -11,7 +11,7 @@ namespace ToernooiPlukkerAPI.Models
         IEnumerable<SpelerDTO> GetByTeamId(int id);
         void Add(Speler speler);
         void Delete(Speler speler);
-        Speler Update(Speler speler);
+        Speler Update(SpelerDTO speler);
         void SaveChanges();
     }
 }

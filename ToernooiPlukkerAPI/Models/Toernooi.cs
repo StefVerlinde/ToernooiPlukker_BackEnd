@@ -43,11 +43,5 @@ namespace ToernooiPlukkerAPI.Models
 
         public Toernooi() { }
 
-        public void addTeam(Team team)
-        {
-            if (team == null)
-                throw new ArgumentException("Team mag niet null zijn");
-           Teams.Add(team);
-        }
     }
 }

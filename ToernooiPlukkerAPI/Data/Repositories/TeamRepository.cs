@@ -53,10 +53,10 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Team Update(Team team)
+        public Team Update(TeamDTO team)
         {
             var t = GetById(team.TeamId);
-            team.Naam = team.Naam;
+            t.Naam = team.Naam;
             _context.Update(t);
             _context.SaveChanges();
             return GetById(t.TeamId);

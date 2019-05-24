@@ -11,7 +11,7 @@ namespace ToernooiPlukkerAPI.Models
         IEnumerable<TeamDTO> GetByToernooiId(int id);
         void Add(Team team);
         void Delete(Team team);
-        Team Update(Team team);
+        Team Update(TeamDTO team);
         void SaveChanges();
     }
 }
