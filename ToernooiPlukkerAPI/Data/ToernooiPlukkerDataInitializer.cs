@@ -36,51 +36,147 @@ namespace ToernooiPlukkerAPI.Data
                 };
 
                 //Aanmaken toernooien
-                users[0].addToernooi(new Toernooi("Clubtoernooi 2017", new DateTime(2017, 04, 25), 20, 4, users[0]));
-                users[0].addToernooi(new Toernooi("Clubtoernooi 2018", new DateTime(2018, 04, 25), 20, 4, users[0]));
-                users[1].addToernooi(new Toernooi("Clubtoernooi 2019", new DateTime(2019, 04, 25), 20, 4, users[1]));
+                users[0].Toernooien = new Collection<Toernooi> {
+                        new Toernooi("Clubtoernooi 2017", new DateTime(2017, 04, 25), users[0]),
+                        new Toernooi("Clubtoernooi 2018", new DateTime(2018, 04, 25), users[0])
+                };
+                users[1].Toernooien = new Collection<Toernooi>
+                {
+                     new Toernooi("Clubtoernooi 2019", new DateTime(2019, 04, 25), users[1]),
+                };
 
                 //Aanmaken teams met spelers
-                foreach (Toernooi t in users[0].Toernooien)
+                users[0].Toernooien[0].Teams = new Collection<Team>
                 {
-                    for (int i = 0; i < t.AantalTeams; i++)
-                    {
-                        Team team = new Team($"team{i+1}", 5,t);
-                        Collection<Speler> spelers = new Collection<Speler>
-                        {
-                            new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
-                            new Speler("Bernard","Depoige",8, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Tijs","Martens",6, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Uche","Oesaji",4, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Jordy","Detier",2, Geslacht.Man, Functie.Speler, team)
-                        };
-                        foreach (Speler s in spelers)
-                        {
-                            team.addSpeler(s);
-                        }
-                        t.addTeam(team);
-                    }
-                }
-                foreach (Toernooi t in users[1].Toernooien)
+                    new Team("Team1", users[0].Toernooien[0]),
+                    new Team("Team2", users[0].Toernooien[0]),
+                    new Team("Team3", users[0].Toernooien[0]),
+                    new Team("Team4", users[0].Toernooien[0])
+                };
+                users[0].Toernooien[1].Teams = new Collection<Team>
                 {
-                    for (int i = 0; i < t.AantalTeams; i++)
-                    {
-                        Team team = new Team($"team{i}", 5, t);
-                        Collection<Speler> spelers = new Collection<Speler>
-                        {
-                            new Speler("Stef","Verlinde",10, Geslacht.Man, Functie.Kapitein, team),
-                            new Speler("Bernard","Depoige",8, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Tijs","Martens",6, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Uche","Oesaji",4, Geslacht.Man, Functie.Speler, team),
-                            new Speler("Jordy","Detier",2, Geslacht.Man, Functie.Speler, team)
-                        };
-                        foreach (Speler s in spelers)
-                        {
-                            team.addSpeler(s);
-                        }
-                        t.addTeam(team);
-                    }
-                }
+                    new Team("Team1", users[0].Toernooien[1]),
+                    new Team("Team2", users[0].Toernooien[1])
+                };
+                users[1].Toernooien[0].Teams = new Collection<Team>
+                {
+                    new Team("Team1", users[1].Toernooien[0]),
+                    new Team("Team2", users[1].Toernooien[0]),
+                    new Team("Team3", users[1].Toernooien[0])
+                };
+
+                //Aanamken Spelers
+                users[0].Toernooien[0].Teams[0].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[0].Teams[0]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[0]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[0]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[0]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[0])
+                };
+                users[0].Toernooien[0].Teams[1].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[0].Teams[1]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[1]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[1]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[1]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[1])
+                };
+                users[0].Toernooien[0].Teams[2].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[0].Teams[2]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[2]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[2]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[2]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[2])
+                };
+                users[0].Toernooien[0].Teams[3].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[0].Teams[3]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[3]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[3]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[3]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[0].Teams[3])
+                };
+
+                users[0].Toernooien[1].Teams[0].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[1].Teams[0]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[1].Teams[0]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[1].Teams[0])
+                };
+                users[0].Toernooien[1].Teams[1].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[0].Toernooien[1].Teams[1]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[1].Teams[1]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[0].Toernooien[1].Teams[1])
+                };
+
+                users[1].Toernooien[0].Teams[0].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[1].Toernooien[0].Teams[0]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[0]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[0]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[0]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[0])
+                };
+                users[1].Toernooien[0].Teams[1].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[1].Toernooien[0].Teams[1]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[1]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[1]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[1]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[1])
+                };
+                users[1].Toernooien[0].Teams[2].Spelers = new Collection<Speler>
+                {
+                    new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), users[1].Toernooien[0].Teams[2]),
+                    new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[2]),
+                    new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[2]),
+                    new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[2]),
+                    new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), users[1].Toernooien[0].Teams[2])
+                };
+
+                //foreach (Toernooi t in users[0].Toernooien)
+                //{
+                //    for (int i = 0; i < 4; i++)
+                //    {
+                //        Team team = new Team($"team{i+1}", t);
+                //        Collection<Speler> spelers = new Collection<Speler>
+                //        {
+                //            new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), team),
+                //            new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), team)
+                //        };
+                //        foreach (Speler s in spelers)
+                //        {
+                //            team.addSpeler(s);
+                //        }
+                //        t.addTeam(team);
+                //    }
+                //}
+                //foreach (Toernooi t in users[1].Toernooien)
+                //{
+                //    for (int i = 0; i < 4; i++)
+                //    {
+                //        Team team = new Team($"team{i}", t);
+                //        Collection<Speler> spelers = new Collection<Speler>
+                //        {
+                //            new Speler("Stef","Verlinde",10, Geslacht.Man.ToString(), Functie.Kapitein.ToString(), team),
+                //            new Speler("Bernard","Depoige",8, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Tijs","Martens",6, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Uche","Oesaji",4, Geslacht.Man.ToString(), Functie.Speler.ToString(), team),
+                //            new Speler("Jordy","Detier",2, Geslacht.Man.ToString(), Functie.Speler.ToString(), team)
+                //        };
+                //        foreach (Speler s in spelers)
+                //        {
+                //            team.addSpeler(s);
+                //        }
+                //        t.addTeam(team);
+                //    }
+                //}
                 foreach (User u in users)
                 {
                     _dbContext.Users_Domain.Add(u);

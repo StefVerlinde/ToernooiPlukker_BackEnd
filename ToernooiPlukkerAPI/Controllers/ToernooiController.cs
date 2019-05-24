@@ -46,19 +46,20 @@ namespace ToernooiPlukkerAPI.Controllers
         [HttpPost]
         public ActionResult<Toernooi> CreateToernooi(Toernooi toernooi)
         {
-            Toernooi toernooiToCreate = new Toernooi(toernooi.Naam, toernooi.Datum, toernooi.AantalSpelers, toernooi.AantalTeams, toernooi.Creator);
+            Toernooi toernooiToCreate = new Toernooi(toernooi.Naam, toernooi.Datum, toernooi.Creator);
             _toernooiRepository.Add(toernooiToCreate);
             _toernooiRepository.SaveChanges();
             return CreatedAtAction(nameof(GetToernooi), new { id = toernooiToCreate.ToernooiId }, toernooiToCreate);
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Toernooi> UpdateToernooi(int id, Toernooi toernooi)
+        public ActionResult<Toernooi> UpdateToernooi(int id, ToernooiDTO toernooi)
         {
             if (id != toernooi.ToernooiId)
             {
                 return BadRequest();
             }
+            toernooi.Datum = toernooi.Datum.AddDays(1);
             var toer = _toernooiRepository.Update(toernooi);
             _toernooiRepository.SaveChanges();
             return toer;

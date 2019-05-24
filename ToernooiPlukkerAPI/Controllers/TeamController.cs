@@ -44,7 +44,7 @@ namespace ToernooiPlukkerAPI.Controllers
         [HttpPost]
         public ActionResult<Team> CreateTeam(Team team)
         {
-            Team teamToCreate = new Team(team.Naam, team.AantalSpelers, team.Toernooi);
+            Team teamToCreate = new Team(team.Naam, team.Toernooi);
             _teamRepository.Add(teamToCreate);
             _teamRepository.SaveChanges();
             return CreatedAtAction(nameof(GetTeam), new { id = teamToCreate.TeamId }, teamToCreate);

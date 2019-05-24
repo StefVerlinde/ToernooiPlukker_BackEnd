@@ -54,7 +54,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Toernooi Update(Toernooi toernooi)
+        public Toernooi Update(ToernooiDTO toernooi)
         {
             var toer = GetById(toernooi.ToernooiId);
             toer.Naam = toernooi.Naam;

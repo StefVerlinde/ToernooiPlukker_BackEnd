@@ -9,7 +9,6 @@ namespace ToernooiPlukkerAPI.Models
     public class Team
     {
         private string _naam;
-        private int _aantalSpelers;
 
         public int TeamId { get; set; }
         public string Naam {
@@ -20,14 +19,6 @@ namespace ToernooiPlukkerAPI.Models
                 _naam = value;
             }
         }
-        public int AantalSpelers {
-            get => _aantalSpelers;
-            set {
-                if (value <= 0)
-                    throw new ArgumentException("Aantal spelers moet hoger dan 0 zijn");
-                _aantalSpelers = value;
-            }
-        }
 
         public Collection<Speler> Spelers { get; set; }
 
@@ -35,11 +26,9 @@ namespace ToernooiPlukkerAPI.Models
 
         public Team() { }
 
-        public Team(string naam, int aantalSpelers,Toernooi toernooi)
+        public Team(string naam, Toernooi toernooi)
         {
             Naam = naam;
-            AantalSpelers = aantalSpelers;
-            Spelers = new Collection<Speler>();
             Toernooi = toernooi;
         }
 

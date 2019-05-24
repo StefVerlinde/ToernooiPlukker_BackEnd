@@ -12,8 +12,6 @@ namespace ToernooiPlukkerAPI.DTOs
         public int ToernooiId { get; set; }
         public string Naam { get; set; }
         public DateTime Datum { get; set; }
-        public int AantalSpelers { get; set; }
-        public int AantalTeams { get; set; }
         public UserDTO Creator { get; set; }
 
         public ToernooiDTO(Toernooi toernooi)
@@ -23,8 +21,6 @@ namespace ToernooiPlukkerAPI.DTOs
                 ToernooiId = toernooi.ToernooiId;
                 Naam = toernooi.Naam;
                 Datum = toernooi.Datum;
-                AantalSpelers = toernooi.AantalSpelers;
-                AantalTeams = toernooi.AantalTeams;
                 Creator = new UserDTO(toernooi.Creator);
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using ToernooiPlukkerAPI.DTOs;
 
 namespace ToernooiPlukkerAPI.Models
 {
@@ -53,7 +54,6 @@ namespace ToernooiPlukkerAPI.Models
             Naam = naam;
             Achternaam = achternaam;
             Email = email;
-            Toernooien = new Collection<Toernooi>();
         }
 
         public User()

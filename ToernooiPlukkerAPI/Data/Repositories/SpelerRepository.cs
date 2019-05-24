@@ -61,6 +61,7 @@ namespace ToernooiPlukkerAPI.Data.Repositories
             s.Sterkte = speler.Sterkte;
             s.Geslacht = speler.Geslacht;
             s.Functie = speler.Functie;
+            s.Team = speler.Team;
             _context.Update(s);
             _context.SaveChanges();
             return GetById(s.SpelerId);

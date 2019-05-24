@@ -40,15 +40,15 @@ namespace ToernooiPlukkerAPI.Models
             }
         }
 
-        public Geslacht Geslacht { get; set; }
+        public string Geslacht { get; set; }
 
-        public Functie Functie { get; set; }
+        public string Functie { get; set; }
 
         public Team Team { get; set; }
 
         public Speler() { }
 
-        public Speler(string naam, string achternaam, int sterkte, Geslacht geslacht, Functie functie, Team team)
+        public Speler(string naam, string achternaam, int sterkte, string geslacht, string functie, Team team)
         {
             Naam = naam;
             Achternaam = achternaam;

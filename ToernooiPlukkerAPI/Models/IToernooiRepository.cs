@@ -11,7 +11,7 @@ namespace ToernooiPlukkerAPI.Models
         IEnumerable<ToernooiDTO> GetByUserId(int id);
         void Add(Toernooi toernooi);
         void Delete(Toernooi toernooi);
-        Toernooi Update(Toernooi toernooi);
+        Toernooi Update(ToernooiDTO toernooi);
         void SaveChanges();
     }
 }
